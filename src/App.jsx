@@ -13,7 +13,7 @@ export default function App() {
       {/* Floating Chat Toggle Button */}
       {!isChatOpen && (
         <button className="fab-btn" onClick={() => setIsChatOpen(true)}>
-          💬
+   💬
         </button>
       )}
 
