@@ -1,0 +1,39 @@
+.navbar {
+  position: fixed;   /* 🔥 top pe fix */
+  top: 0;
+  width: 100%;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(15, 23, 42, 0.7);
+  -webkit-backdrop-filter:blur(10px);  /* glass effect */
+backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #a78bfa;
+}
+
+.nav-buttons button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.signin {
+  background: transparent;
+  border: 1px solid #aaa;
+  color: white;
+}
+
+.signup {
+  background: linear-gradient(45deg, #7c3aed, #ec4899);
+  color: white;
+}

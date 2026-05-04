@@ -16,12 +16,11 @@ export default function LandingPage() {
       <div className="landing-icon">🎓</div>
 
       {/* Title */}
-      <h1 className="landing-title">Smart College Bot</h1>
+      <h1 className="landing-title">Basu-CampusIQ</h1>
 
       {/* Subtitle */}
       <p className="landing-subtitle">
-        Apne college ke baare mein kuch bhi poochho — fees, admission,
-        placement, sab kuch!
+        An all-in-one assistant:Ask about college update or any other topic you're curious about.
       </p>
 
       {/* Topic Chips */}

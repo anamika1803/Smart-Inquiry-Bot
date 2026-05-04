@@ -11,20 +11,23 @@ const QUICK_REPLIES = [
   "MBA placement stats?",
   "Hostel available hai?",
   "Eligibility criteria kya hai?",
+  
+  
 ];
 
 const SYSTEM_PROMPT = `
-You are Basu, a Smart College Assistant for an Indian college.
-Answer only questions related to: fees, admissions, placements, hostel, eligibility, courses.
+You are Basu, a EduAura Assistant for an Indian college.
+You can answer ANY question the user asks — including general topics like weather, food, places,maps, travel, facts, etc.
+For college-related questions (fees, admissions, placements, hostel, eligibility), give detailed answers.
+For general questions, give helpful and friendly answers.
 Reply naturally in Hindi, English, or Hinglish — match the user's language.
 Keep answers concise and helpful. Use emojis occasionally.
-If asked something outside college topics, politely redirect.
 `;
 
 const WELCOME_MESSAGE = {
   role: "assistant",
   content:
-    "Namaste! 🎓 Main Basu hoon, aapka Smart College Assistant!\n\nMujhse fees, admission, placement, ya kisi bhi course ke baare mein poochh sakte ho. Main Hindi, English, ya Hinglish mein answer dunga! 😊",
+    "Namaste! 🎓 Main Basu hoon, aapka EduAura Assistant!\n\nMujhse fees, admission, placement,general, ya kisi bhi course ke baare mein poochh sakte ho. Main Hindi, English, ya Hinglish mein answer dunga! 😊",
 };
 
 export default function ChatWindow({ onClose }) {
@@ -50,20 +53,23 @@ export default function ChatWindow({ onClose }) {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
-          messages: updatedMessages,
-        }),
-      });
+      const response = await fetch("http://localhost:5000/api/chat", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "X-API-KEY": "CB-SECRET-2025-REPLACE-THIS-KEY"
+  },
+  body: JSON.stringify({
+    message: trimmed,
+    history: messages.map(m => ({
+      role: m.role,
+      content: m.content
+    }))
+  }),
+});
 
       const data = await response.json();
-      const reply =
-        data?.content?.[0]?.text || "Kuch problem aayi, dobara try karein.";
+    const reply =data?.message ||"kuch problem aayi.";
 
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch (err) {
@@ -95,7 +101,7 @@ export default function ChatWindow({ onClose }) {
           </div>
 
           <div className="header-info">
-            <div className="header-name">Basu — College Assistant</div>
+            <div className="header-name">Basu — Your Assistant</div>
             <div className="header-status">● Online • Ready to help</div>
           </div>
 
